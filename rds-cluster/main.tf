@@ -73,12 +73,12 @@ variable "port" {
   default     = 3306
 }
 
-variable "database_engine" {
+variable "engine" {
   description = "E.g., postgres"
   default = "postgres"
 }
 
-variable "database_engine_version" {
+variable "engine_version" {
   description = "E.g., 9.5.2"
   default = "9.5.2"
 }
@@ -120,8 +120,8 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   cluster_identifier   = "${aws_rds_cluster.main.id}"
   publicly_accessible  = "${var.publicly_accessible}"
   instance_class       = "${var.instance_type}"
-  engine                  = "${var.database_engine}"
-  engine_version          = "${var.databse_engine_version}"
+  engine                  = "${var.engine}"
+  engine_version          = "${var.engine_version}"
 
 }
 
@@ -129,8 +129,8 @@ resource "aws_rds_cluster" "main" {
   cluster_identifier      = "${var.name}"
   availability_zones      = ["${split(",", var.availability_zones)}"]
   database_name           = "${var.database_name}"
-  engine                  = "${var.database_engine}"
-  engine_version          = "${var.databse_engine_version}"
+  engine                  = "${var.engine}"
+  engine_version          = "${var.engine_version}"
   master_username         = "${var.master_username}"
   master_password         = "${var.master_password}"
   backup_retention_period = "${var.backup_retention_period}"
